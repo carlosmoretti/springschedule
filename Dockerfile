@@ -1,8 +1,8 @@
-FROM adoptopenjdk/openjdk11:alpine
-RUN addgroup -S spring && adduser -S spring -G spring
-USER spring:spring
-VOLUME /tmp
-ARG JAR_FILE
-ADD ${JAR_FILE} /app/app.jar
-EXPOSE 8080
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app/app.jar"]
+########build stage########
+FROM maven:3.6.0-jdk-11-slim 
+RUN mvn clean
+RUN mvn package
+
+FROM adoptopenjdk/openjdk11:jdk-11.0.9.1_1
+COPY . /app
+ENTRYPOINT ["java","-jar","app/target/service-0.0.1-SNAPSHOT.jar"]
