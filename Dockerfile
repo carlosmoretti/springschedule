@@ -6,6 +6,5 @@ RUN mvn clean
 RUN mvn package
 
 FROM adoptopenjdk/openjdk11:jdk-11.0.9.1_1
-WORKDIR /app
-RUN ls
-ENTRYPOINT ["java","-jar","/target/service-0.0.1-SNAPSHOT.jar"]
+WORKDIR /app/target
+ENTRYPOINT ["java","-jar","service-0.0.1-SNAPSHOT.jar"]
