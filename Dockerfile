@@ -1,5 +1,7 @@
 ########build stage########
-FROM maven:3.6.0-jdk-11-slim 
+FROM maven:3.6.0-jdk-11-slim
+WORKDIR /app
+COPY . /app
 RUN mvn clean
 RUN mvn package
 
